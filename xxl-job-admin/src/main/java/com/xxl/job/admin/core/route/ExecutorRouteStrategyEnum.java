@@ -18,30 +18,30 @@ public enum ExecutorRouteStrategyEnum {
     BUSYOVER("忙碌转移", new ExecutorRouteBusyover()),
     SHARDING_BROADCAST("分片广播", null);
 
+    private String title;
+    private ExecutorRouter router;
     ExecutorRouteStrategyEnum(String title, ExecutorRouter router) {
         this.title = title;
         this.router = router;
     }
 
-    private String title;
-    private ExecutorRouter router;
-
-    public String getTitle() {
-        return title;
-    }
-    public ExecutorRouter getRouter() {
-        return router;
-    }
-
-    public static ExecutorRouteStrategyEnum match(String name, ExecutorRouteStrategyEnum defaultItem){
+    public static ExecutorRouteStrategyEnum match(String name, ExecutorRouteStrategyEnum defaultItem) {
         if (name != null) {
-            for (ExecutorRouteStrategyEnum item: ExecutorRouteStrategyEnum.values()) {
+            for (ExecutorRouteStrategyEnum item : ExecutorRouteStrategyEnum.values()) {
                 if (item.name().equals(name)) {
                     return item;
                 }
             }
         }
         return defaultItem;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public ExecutorRouter getRouter() {
+        return router;
     }
 
 }

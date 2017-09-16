@@ -30,9 +30,9 @@ public class ExecutorRouteFailover extends ExecutorRouter {
                 beatResult = executorBiz.beat();
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
-                beatResult = new ReturnT<String>(ReturnT.FAIL_CODE, ""+e );
+                beatResult = new ReturnT<String>(ReturnT.FAIL_CODE, "" + e);
             }
-            beatResultSB.append( (beatResultSB.length()>0)?"<br><br>":"")
+            beatResultSB.append((beatResultSB.length() > 0) ? "<br><br>" : "")
                     .append("心跳检测：")
                     .append("<br>address：").append(address)
                     .append("<br>code：").append(beatResult.getCode())

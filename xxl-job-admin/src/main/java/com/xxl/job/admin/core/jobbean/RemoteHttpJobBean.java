@@ -11,22 +11,23 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 /**
  * http job bean
  * “@DisallowConcurrentExecution” diable concurrent, thread size can not be only one, better given more
+ *
  * @author xuxueli 2015-12-17 18:20:34
  */
 //@DisallowConcurrentExecution
 public class RemoteHttpJobBean extends QuartzJobBean {
-	private static Logger logger = LoggerFactory.getLogger(RemoteHttpJobBean.class);
+    private static Logger logger = LoggerFactory.getLogger(RemoteHttpJobBean.class);
 
-	@Override
-	protected void executeInternal(JobExecutionContext context)
-			throws JobExecutionException {
+    @Override
+    protected void executeInternal(JobExecutionContext context)
+            throws JobExecutionException {
 
-		// load jobId
-		JobKey jobKey = context.getTrigger().getJobKey();
-		Integer jobId = Integer.valueOf(jobKey.getName());
+        // load jobId
+        JobKey jobKey = context.getTrigger().getJobKey();
+        Integer jobId = Integer.valueOf(jobKey.getName());
 
-		// trigger
-		XxlJobTrigger.trigger(jobId);
-	}
+        // trigger
+        XxlJobTrigger.trigger(jobId);
+    }
 
 }

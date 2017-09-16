@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-  	<title>任务调度中心</title>
-  	<#import "/common/common.macro.ftl" as netCommon>
-	<@netCommon.commonStyle />
+    <title>任务调度中心</title>
+<#import "/common/common.macro.ftl" as netCommon>
+<@netCommon.commonStyle />
 </head>
 <body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if> ">
 <div class="wrapper">
-	<!-- header -->
-	<@netCommon.commonHeader />
-	<!-- left -->
-	<@netCommon.commonLeft "index" />
-	
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>运行报表<small>任务调度中心</small></h1>
-			<!--
-			<ol class="breadcrumb">
-				<li><a><i class="fa fa-dashboard"></i>调度中心</a></li>
-				<li class="active">使用教程</li>
-			</ol>
-			-->
-		</section>
+    <!-- header -->
+<@netCommon.commonHeader />
+    <!-- left -->
+<@netCommon.commonLeft "index" />
 
-		<!-- Main content -->
-		<section class="content">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>运行报表
+                <small>任务调度中心</small>
+            </h1>
+            <!--
+            <ol class="breadcrumb">
+                <li><a><i class="fa fa-dashboard"></i>调度中心</a></li>
+                <li class="active">使用教程</li>
+            </ol>
+            -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
 
             <!-- 任务信息 -->
             <div class="row">
 
-                <#-- 任务信息 -->
+            <#-- 任务信息 -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box bg-aqua">
                         <span class="info-box-icon"><i class="fa fa-flag-o"></i></span>
@@ -48,8 +50,8 @@
                     </div>
                 </div>
 
-                <#-- 调度信息 -->
-                <div class="col-md-4 col-sm-6 col-xs-12" >
+            <#-- 调度信息 -->
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box bg-yellow">
                         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
@@ -58,19 +60,19 @@
                             <span class="info-box-number">${jobLogCount}</span>
 
                             <div class="progress">
-                                <div class="progress-bar" style="width: 100%" ></div>
+                                <div class="progress-bar" style="width: 100%"></div>
                             </div>
                             <span class="progress-description">
                                 调度中心触发的调度次数
-                                <#--<#if jobLogCount gt 0>
-                                    调度成功率：${(jobLogSuccessCount*100/jobLogCount)?string("0.00")}<small>%</small>
-                                </#if>-->
+                            <#--<#if jobLogCount gt 0>
+                                调度成功率：${(jobLogSuccessCount*100/jobLogCount)?string("0.00")}<small>%</small>
+                            </#if>-->
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <#-- 执行器 -->
+            <#-- 执行器 -->
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box bg-green">
                         <span class="info-box-icon"><i class="fa ion-ios-settings-strong"></i></span>
@@ -89,21 +91,21 @@
 
             </div>
 
-            <#-- 调度报表：时间区间筛选，左侧折线图 + 右侧饼图 -->
+        <#-- 调度报表：时间区间筛选，左侧折线图 + 右侧饼图 -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
                             <h3 class="box-title">调度报表（一月之内）</h3>
-                            <#--<input type="text" class="form-control" id="filterTime" readonly >-->
+                        <#--<input type="text" class="form-control" id="filterTime" readonly >-->
                         </div>
                         <div class="box-body">
                             <div class="row">
-                                <#-- 左侧折线图 -->
+                            <#-- 左侧折线图 -->
                                 <div class="col-md-8">
                                     <div id="lineChart" style="height: 350px;"></div>
                                 </div>
-                                <#-- 右侧饼图 -->
+                            <#-- 右侧饼图 -->
                                 <div class="col-md-4">
                                     <div id="pieChart" style="height: 350px;"></div>
                                 </div>
@@ -114,13 +116,13 @@
             </div>
 
 
-		</section>
-		<!-- /.content -->
-	</div>
-	<!-- /.content-wrapper -->
-	
-	<!-- footer -->
-	<@netCommon.commonFooter />
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- footer -->
+<@netCommon.commonFooter />
 </div>
 <@netCommon.commonScript />
 <#--<script src="${request.contextPath}/static/adminlte/plugins/daterangepicker/moment.min.js"></script>

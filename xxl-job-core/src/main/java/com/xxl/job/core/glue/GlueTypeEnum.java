@@ -12,19 +12,21 @@ public enum GlueTypeEnum {
     GLUE_NODEJS("GLUE模式(Nodejs)");
 
     private String desc;
+
     private GlueTypeEnum(String desc) {
         this.desc = desc;
     }
-    public String getDesc() {
-        return desc;
-    }
 
-    public static GlueTypeEnum match(String name){
-        for (GlueTypeEnum item: GlueTypeEnum.values()) {
+    public static GlueTypeEnum match(String name) {
+        for (GlueTypeEnum item : GlueTypeEnum.values()) {
             if (item.name().equals(name)) {
                 return item;
             }
         }
         return null;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 }

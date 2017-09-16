@@ -23,7 +23,7 @@ public class XxlJobLogger {
 
         // logFileName
         String logFileName = XxlJobFileAppender.contextHolder.get();
-        if (logFileName==null || logFileName.trim().length()==0) {
+        if (logFileName == null || logFileName.trim().length() == 0) {
             return;
         }
 
@@ -33,11 +33,11 @@ public class XxlJobLogger {
 
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(xxlJobLoggerFormat.format(new Date())).append(" ")
-            .append("["+ callInfo.getClassName() +"]").append("-")
-            .append("["+ callInfo.getMethodName() +"]").append("-")
-            .append("["+ callInfo.getLineNumber() +"]").append("-")
-            .append("["+ Thread.currentThread().getName() +"]").append(" ")
-            .append(appendLog!=null?appendLog:"");
+                .append("[" + callInfo.getClassName() + "]").append("-")
+                .append("[" + callInfo.getMethodName() + "]").append("-")
+                .append("[" + callInfo.getLineNumber() + "]").append("-")
+                .append("[" + Thread.currentThread().getName() + "]").append(" ")
+                .append(appendLog != null ? appendLog : "");
         String formatAppendLog = stringBuffer.toString();
 
         // appendlog
@@ -49,12 +49,11 @@ public class XxlJobLogger {
     /**
      * append log with pattern
      *
+     * @param appendLogPattern   like "aaa {0} bbb {1} ccc"
+     * @param appendLogArguments like "111, true"
      * @
-     *
-     * @param appendLogPattern  like "aaa {0} bbb {1} ccc"
-     * @param appendLogArguments    like "111, true"
      */
-    public static void log(String appendLogPattern, Object ... appendLogArguments) {
+    public static void log(String appendLogPattern, Object... appendLogArguments) {
         String appendLog = MessageFormat.format(appendLogPattern, appendLogArguments);
         log(appendLog);
     }

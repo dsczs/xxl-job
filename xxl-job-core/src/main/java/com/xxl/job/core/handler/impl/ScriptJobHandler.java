@@ -17,7 +17,7 @@ public class ScriptJobHandler extends IJobHandler {
     private String gluesource;
     private GlueTypeEnum glueType;
 
-    public ScriptJobHandler(int jobId, long glueUpdatetime, String gluesource, GlueTypeEnum glueType){
+    public ScriptJobHandler(int jobId, long glueUpdatetime, String gluesource, GlueTypeEnum glueType) {
         this.jobId = jobId;
         this.glueUpdatetime = glueUpdatetime;
         this.gluesource = gluesource;
@@ -52,9 +52,9 @@ public class ScriptJobHandler extends IJobHandler {
         String logFileName = XxlJobFileAppender.logPath.concat(XxlJobFileAppender.contextHolder.get());
 
         // invoke
-        XxlJobLogger.log("----------- script file:"+ scriptFileName +" -----------");
+        XxlJobLogger.log("----------- script file:" + scriptFileName + " -----------");
         int exitValue = ScriptUtil.execToFile(cmd, scriptFileName, logFileName, params);
-        ReturnT<String> result = (exitValue==0)?ReturnT.SUCCESS:new ReturnT<String>(ReturnT.FAIL_CODE, "script exit value("+exitValue+") is failed");
+        ReturnT<String> result = (exitValue == 0) ? ReturnT.SUCCESS : new ReturnT<String>(ReturnT.FAIL_CODE, "script exit value(" + exitValue + ") is failed");
         return result;
     }
 

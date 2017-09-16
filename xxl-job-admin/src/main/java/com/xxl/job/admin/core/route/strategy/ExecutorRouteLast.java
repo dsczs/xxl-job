@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ExecutorRouteLast extends ExecutorRouter {
 
     public String route(int jobId, ArrayList<String> addressList) {
-        return addressList.get(addressList.size()-1);
+        return addressList.get(addressList.size() - 1);
     }
 
     @Override

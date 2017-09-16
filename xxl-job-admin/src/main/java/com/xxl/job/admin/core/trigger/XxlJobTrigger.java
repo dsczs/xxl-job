@@ -66,14 +66,14 @@ public class XxlJobTrigger {
 
                 ReturnT<String> triggerResult = new ReturnT<String>(null);
                 StringBuffer triggerMsgSb = new StringBuffer();
-                triggerMsgSb.append("注册方式：").append( (group.getAddressType() == 0)?"自动注册":"手动录入" );
+                triggerMsgSb.append("注册方式：").append((group.getAddressType() == 0) ? "自动注册" : "手动录入");
                 triggerMsgSb.append("<br>阻塞处理策略：").append(blockStrategy.getTitle());
                 triggerMsgSb.append("<br>失败处理策略：").append(failStrategy.getTitle());
                 triggerMsgSb.append("<br>地址列表：").append(group.getRegistryList());
-                triggerMsgSb.append("<br>路由策略：").append(executorRouteStrategyEnum.getTitle()).append("("+i+"/"+addressList.size()+")"); // update01
+                triggerMsgSb.append("<br>路由策略：").append(executorRouteStrategyEnum.getTitle()).append("(" + i + "/" + addressList.size() + ")"); // update01
 
                 // 3、trigger-valid
-                if (triggerResult.getCode()==ReturnT.SUCCESS_CODE && CollectionUtils.isEmpty(addressList)) {
+                if (triggerResult.getCode() == ReturnT.SUCCESS_CODE && CollectionUtils.isEmpty(addressList)) {
                     triggerResult.setCode(ReturnT.FAIL_CODE);
                     triggerMsgSb.append("<br>----------------------<br>").append("调度失败：").append("执行器地址为空");
                 }
@@ -98,7 +98,7 @@ public class XxlJobTrigger {
                     triggerMsgSb.append("<br><br><span style=\"color:#00c0ef;\" > >>>>>>>>>>>触发调度<<<<<<<<<<< </span><br>").append(triggerResult.getMsg());
 
                     // 4.3、trigger (fail retry)
-                    if (triggerResult.getCode()!=ReturnT.SUCCESS_CODE && failStrategy == ExecutorFailStrategyEnum.FAIL_RETRY) {
+                    if (triggerResult.getCode() != ReturnT.SUCCESS_CODE && failStrategy == ExecutorFailStrategyEnum.FAIL_RETRY) {
                         triggerResult = runExecutor(triggerParam, address);  // update04
                         triggerMsgSb.append("<br><br><span style=\"color:#F39C12;\" > >>>>>>>>>>>失败重试<<<<<<<<<<< </span><br>").append(triggerResult.getMsg());
                     }
@@ -134,14 +134,14 @@ public class XxlJobTrigger {
 
         ReturnT<String> triggerResult = new ReturnT<String>(null);
         StringBuffer triggerMsgSb = new StringBuffer();
-        triggerMsgSb.append("注册方式：").append( (group.getAddressType() == 0)?"自动注册":"手动录入" );
+        triggerMsgSb.append("注册方式：").append((group.getAddressType() == 0) ? "自动注册" : "手动录入");
         triggerMsgSb.append("<br>阻塞处理策略：").append(blockStrategy.getTitle());
         triggerMsgSb.append("<br>失败处理策略：").append(failStrategy.getTitle());
         triggerMsgSb.append("<br>地址列表：").append(group.getRegistryList());
         triggerMsgSb.append("<br>路由策略：").append(executorRouteStrategyEnum.getTitle());
 
         // 3、trigger-valid
-        if (triggerResult.getCode()==ReturnT.SUCCESS_CODE && CollectionUtils.isEmpty(addressList)) {
+        if (triggerResult.getCode() == ReturnT.SUCCESS_CODE && CollectionUtils.isEmpty(addressList)) {
             triggerResult.setCode(ReturnT.FAIL_CODE);
             triggerMsgSb.append("<br>----------------------<br>").append("调度失败：").append("执行器地址为空");
         }
@@ -166,7 +166,7 @@ public class XxlJobTrigger {
             triggerMsgSb.append("<br><br><span style=\"color:#00c0ef;\" > >>>>>>>>>>>触发调度<<<<<<<<<<< </span><br>").append(triggerResult.getMsg());
 
             // 4.3、trigger (fail retry)
-            if (triggerResult.getCode()!=ReturnT.SUCCESS_CODE && failStrategy == ExecutorFailStrategyEnum.FAIL_RETRY) {
+            if (triggerResult.getCode() != ReturnT.SUCCESS_CODE && failStrategy == ExecutorFailStrategyEnum.FAIL_RETRY) {
                 triggerResult = executorRouteStrategyEnum.getRouter().routeRun(triggerParam, addressList);
                 triggerMsgSb.append("<br><br><span style=\"color:#F39C12;\" > >>>>>>>>>>>失败重试<<<<<<<<<<< </span><br>").append(triggerResult.getMsg());
             }
@@ -185,18 +185,19 @@ public class XxlJobTrigger {
 
     /**
      * run executor
+     *
      * @param triggerParam
      * @param address
-     * @return  ReturnT.content: final address
+     * @return ReturnT.content: final address
      */
-    public static ReturnT<String> runExecutor(TriggerParam triggerParam, String address){
+    public static ReturnT<String> runExecutor(TriggerParam triggerParam, String address) {
         ReturnT<String> runResult = null;
         try {
             ExecutorBiz executorBiz = XxlJobDynamicScheduler.getExecutorBiz(address);
             runResult = executorBiz.run(triggerParam);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            runResult = new ReturnT<String>(ReturnT.FAIL_CODE, ""+e );
+            runResult = new ReturnT<String>(ReturnT.FAIL_CODE, "" + e);
         }
 
         StringBuffer runResultSB = new StringBuffer("触发调度：");

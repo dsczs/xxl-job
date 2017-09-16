@@ -12,30 +12,30 @@ import java.util.Properties;
 
 /**
  * properties util
+ *
  * @author xuxueli 2015-8-28 10:35:53
  */
 public class PropertiesUtil {
-	private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
-	private static final String file_name = "xxl-job-admin.properties";
+    private static final String file_name = "xxl-job-admin.properties";
+    private static Logger logger = LoggerFactory.getLogger(PropertiesUtil.class);
 
+    public static String getString(String key) {
+        Properties prop = null;
+        try {
+            Resource resource = new ClassPathResource(file_name);
+            EncodedResource encodedResource = new EncodedResource(resource, "UTF-8");
+            prop = PropertiesLoaderUtils.loadProperties(encodedResource);
+        } catch (IOException e) {
+            logger.error(e.getMessage(), e);
+        }
+        if (prop != null) {
+            return prop.getProperty(key);
+        }
+        return null;
+    }
 
-	public static String getString(String key) {
-		Properties prop = null;
-		try {
-			Resource resource = new ClassPathResource(file_name);
-			EncodedResource encodedResource = new EncodedResource(resource,"UTF-8");
-			prop = PropertiesLoaderUtils.loadProperties(encodedResource);
-		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
-		}
-		if (prop!=null) {
-			return prop.getProperty(key);
-		}
-		return null;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(getString("xxl.job.login.username"));
-	}
+    public static void main(String[] args) {
+        System.out.println(getString("xxl.job.login.username"));
+    }
 
 }

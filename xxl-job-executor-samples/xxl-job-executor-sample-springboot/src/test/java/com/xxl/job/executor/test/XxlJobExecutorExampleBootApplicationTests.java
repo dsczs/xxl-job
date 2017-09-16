@@ -9,9 +9,9 @@ import org.junit.Test;
 @SpringBootTest(classes = Application.class ,webEnvironment= SpringBootTest.WebEnvironment.DEFINED_PORT)*/
 public class XxlJobExecutorExampleBootApplicationTests {
 
-	@Test
-	public void test() {
+    @Test
+    public void test() {
 
-	}
+    }
 
 }

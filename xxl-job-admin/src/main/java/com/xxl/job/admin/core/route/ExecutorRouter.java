@@ -18,7 +18,7 @@ public abstract class ExecutorRouter {
      *
      * @param triggerParam
      * @param addressList
-     * @return  ReturnT.content: final address
+     * @return ReturnT.content: final address
      */
     public abstract ReturnT<String> routeRun(TriggerParam triggerParam, ArrayList<String> addressList);
 

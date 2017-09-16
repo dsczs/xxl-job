@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
 
     // trigger fail, end
     if (triggerCode != 200) {
@@ -10,6 +10,7 @@ $(function() {
     // pull log
     var fromLineNum = 1;    // [from, to], start as 1
     var pullFailCount = 0;
+
     function pullLog() {
         // pullFailCount, max=20
         if (pullFailCount++ > 20) {
@@ -21,17 +22,17 @@ $(function() {
         console.log("pullLog, fromLineNum:" + fromLineNum);
 
         $.ajax({
-            type : 'POST',
+            type: 'POST',
             async: false,   // sync, make log ordered
-            url : base_url + '/joblog/logDetailCat',
-            data : {
-                "executorAddress":executorAddress,
-                "triggerTime":triggerTime,
-                "logId":logId,
-                "fromLineNum":fromLineNum
+            url: base_url + '/joblog/logDetailCat',
+            data: {
+                "executorAddress": executorAddress,
+                "triggerTime": triggerTime,
+                "logId": logId,
+                "fromLineNum": fromLineNum
             },
-            dataType : "json",
-            success : function(data){
+            dataType: "json",
+            success: function (data) {
 
                 if (data.code == 200) {
                     if (!data.content) {
@@ -42,7 +43,7 @@ $(function() {
                         console.log('pullLog fromLineNum not match');
                         return;
                     }
-                    if (fromLineNum > data.content.toLineNum ) {
+                    if (fromLineNum > data.content.toLineNum) {
                         console.log('pullLog already line-end');
 
                         // valid end
@@ -63,7 +64,7 @@ $(function() {
                     scrollTo(0, document.body.scrollHeight);        // $('#logConsolePre').scrollTop( document.body.scrollHeight + 300 );
 
                 } else {
-                    console.log('pullLog fail:'+data.msg);
+                    console.log('pullLog fail:' + data.msg);
                 }
             }
         });
@@ -82,7 +83,8 @@ $(function() {
     var logRun = setInterval(function () {
         pullLog()
     }, 3000);
-    function logRunStop(content){
+
+    function logRunStop(content) {
         $('#logConsoleRunning').hide();
         logRun = window.clearInterval(logRun);
         $('#logConsole').append(content);

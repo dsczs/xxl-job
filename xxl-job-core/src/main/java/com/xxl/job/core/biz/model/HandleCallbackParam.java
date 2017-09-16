@@ -11,7 +11,9 @@ public class HandleCallbackParam implements Serializable {
     private int logId;
     private ReturnT<String> executeResult;
 
-    public HandleCallbackParam(){}
+    public HandleCallbackParam() {
+    }
+
     public HandleCallbackParam(int logId, ReturnT<String> executeResult) {
         this.logId = logId;
         this.executeResult = executeResult;

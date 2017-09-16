@@ -2,11 +2,20 @@ package com.xxl.job.core.util;
 
 /**
  * sharding vo
+ *
  * @author xuxueli 2017-07-25 21:26:38
  */
 public class ShardingUtil {
 
     private static InheritableThreadLocal<ShardingVO> contextHolder = new InheritableThreadLocal<ShardingVO>();
+
+    public static ShardingVO getShardingVo() {
+        return contextHolder.get();
+    }
+
+    public static void setShardingVo(ShardingVO shardingVo) {
+        contextHolder.set(shardingVo);
+    }
 
     public static class ShardingVO {
 
@@ -33,14 +42,6 @@ public class ShardingUtil {
         public void setTotal(int total) {
             this.total = total;
         }
-    }
-
-    public static void setShardingVo(ShardingVO shardingVo){
-        contextHolder.set(shardingVo);
-    }
-
-    public static ShardingVO getShardingVo(){
-        return contextHolder.get();
     }
 
 }
