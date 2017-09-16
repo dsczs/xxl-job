@@ -29,6 +29,7 @@ public class MailUtil {
     private static String password;
     private static String sendFrom;
     private static String sendNick;
+    private static String sendTo;
 
     /**
      <!-- spring mail sender -->
@@ -54,6 +55,7 @@ public class MailUtil {
         password = PropertiesUtil.getString("xxl.job.mail.password");
         sendFrom = PropertiesUtil.getString("xxl.job.mail.sendFrom");
         sendNick = PropertiesUtil.getString("xxl.job.mail.sendNick");
+        sendTo = PropertiesUtil.getString("xxl.job.mail.sendTo");
     }
 
     /**
@@ -115,9 +117,6 @@ public class MailUtil {
      */
     public static boolean sendMail(String toAddress, String mailSubject, String mailBody,
                                    boolean mailBodyIsHtml, File[] attachments) {
-
-
-
         try {
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
             mailSender.setHost(host);
@@ -126,7 +125,7 @@ public class MailUtil {
             mailSender.setPassword(password);//授权码
 
             SimpleMailMessage mail = new SimpleMailMessage();
-            mail.setTo("156845024@qq.com");
+            mail.setTo(sendTo);
             mail.setFrom(username);
             mail.setSubject(sendNick);
             mail.setText(mailBody);
@@ -150,7 +149,7 @@ public class MailUtil {
                     }
                     String mailBody = "test" + total;
 
-                    sendMail("156845024@qq.com", "测试邮件", mailBody, false, null);
+                    sendMail(sendTo, "测试邮件", mailBody, false, null);
                     System.out.println(total);
                     total++;
                 }
