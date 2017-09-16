@@ -3,6 +3,7 @@ package com.xxl.job.admin.core.util;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -114,41 +115,22 @@ public class MailUtil {
      */
     public static boolean sendMail(String toAddress, String mailSubject, String mailBody,
                                    boolean mailBodyIsHtml, File[] attachments) {
+
+
+
         try {
-            // 创建邮件发送类 JavaMailSender (用于发送多元化邮件，包括附件，图片，html 等    )
             JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-            mailSender.setHost(host);            // 设置邮件服务主机
-            mailSender.setUsername(username);    // 发送者邮箱的用户名
-            mailSender.setPassword(password);    // 发送者邮箱的密码
+            mailSender.setHost(host);
+            mailSender.setPort(Integer.parseInt(port));
+            mailSender.setUsername(username);
+            mailSender.setPassword(password);//授权码
 
-            //配置文件，用于实例化java.mail.session
-            Properties pro = new Properties();
-            pro.put("mail.smtp.auth", "true");        // 登录SMTP服务器,需要获得授权 (网易163邮箱新近注册的邮箱均不能授权,测试 sohu 的邮箱可以获得授权)
-            pro.put("mail.smtp.socketFactory.port", port);
-            pro.put("mail.smtp.socketFactory.fallback", "false");
-            mailSender.setJavaMailProperties(pro);
-
-            //创建多元化邮件 (创建 mimeMessage 帮助类，用于封装信息至 mimeMessage)
-            MimeMessage mimeMessage = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, ArrayUtils.isNotEmpty(attachments), "UTF-8");
-
-            helper.setFrom(sendFrom, sendNick);
-            helper.setTo(toAddress);
-
-            helper.setSubject(mailSubject);
-            helper.setText(mailBody, mailBodyIsHtml);
-
-            // 添加内嵌文件，第1个参数为cid标识这个文件,第2个参数为资源
-            //helper.addInline(MimeUtility.encodeText(inLineFile.getName()), inLineFile);
-
-            // 添加附件
-            if (ArrayUtils.isNotEmpty(attachments)) {
-                for (File file : attachments) {
-                    helper.addAttachment(MimeUtility.encodeText(file.getName()), file);
-                }
-            }
-
-            mailSender.send(mimeMessage);
+            SimpleMailMessage mail = new SimpleMailMessage();
+            mail.setTo("156845024@qq.com");
+            mail.setFrom(username);
+            mail.setSubject(sendNick);
+            mail.setText(mailBody);
+            mailSender.send(mail);
             return true;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
@@ -160,23 +142,18 @@ public class MailUtil {
 
         ExecutorService exec = Executors.newCachedThreadPool();
         for (int i = 0; i < 20; i++) {
-            exec.execute(new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (total < 10) {
-                        String mailBody = "<html><head><meta http-equiv="
-                                + "Content-Type"
-                                + " content="
-                                + "text/html; charset=gb2312"
-                                + "></head><body><h1>新书快递通知</h1>你的新书快递申请已推送新书，请到<a href=''>空间"
-                                + "</a>中查看</body></html>";
-
-                        sendMail("ovono802302@163.com", "测试邮件", mailBody, false, null);
-                        System.out.println(total);
-                        total++;
+                while (total < 10) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                    String mailBody = "test" + total;
+
+                    sendMail("156845024@qq.com", "测试邮件", mailBody, false, null);
+                    System.out.println(total);
+                    total++;
                 }
-            }));
         }
     }
 
