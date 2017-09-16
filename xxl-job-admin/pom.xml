@@ -84,12 +84,11 @@
             <version>${jsp-api.version}</version>
         </dependency>
 
-        <!-- junit -->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <version>4.12</version>
         </dependency>
 
         <!-- c3p0 -->

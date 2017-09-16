@@ -1,6 +1,7 @@
 package com.xxl.job.admin.core.util;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,9 +12,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.File;
-import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 邮件发送.Util
@@ -137,9 +135,8 @@ public class MailUtil {
         return false;
     }
 
-    public static void main(String[] args) {
-
-        ExecutorService exec = Executors.newCachedThreadPool();
+    @Test
+    public void testMail() {
         for (int i = 0; i < 20; i++) {
                 while (total < 10) {
                     try {
